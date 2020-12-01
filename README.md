@@ -2,9 +2,8 @@
 ## 說明：  
 ### 功能：  
     1. 具有用戶上線註冊和下線註銷功能  
-    2. 具有私聊功能  
-    3. 具有群聊功能  
-    4. 具有統計聊天室在線人數的功能  
+    2. 具有群聊功能  
+    3. 具有統計聊天室在線人數的功能  
       
 ### 思路：  
 1. 模式：對於聊天室就是處理多個客戶端發送的請求與信息，從而需要壹個服務器端去處理這些客戶端請求與信息，故采用的是服務器端/客戶端模式。  
@@ -13,11 +12,24 @@
 4. 服務器端方面：服務器端的套接字ServerSocket對象在調用accept()方法偵聽客戶端的連接，當與客戶端成功建立連接後，返回Socket對象，從而利用該Socket對象獲取輸入輸出流從而與客戶端進行通信。  
 
 ### 實現：  
+### 1客戶端與服務器端建立連接：  
 利用Socket編程，客戶端與服務器端建立連接的步驟如下：  
 
 （1）服務器端通過java.net.ServerSocket類的構造方法實例化ServerSocket對象，選擇的構造方法如下：  
 ```public ServerSocket (int port) throws IOException```  
 該構造方法需要傳入參數：端口號，從而創建綁定到指定端口的服務器套接字。  
+（2）客戶端通過java.net.Socket類的構造方法創建一個流套接字並將其連接到指定主機上的指定端口號，該構造方法如下：  
+```public Socket(String host,int port) throws UnknowHostException,IOException```  
+（3）服務器端的ServerSocket對象調用accept()方法偵聽請求連接指定端口號的該服務器端的客戶端，並在接收到客戶端請求後返回服務器端的流套接字，即Socket對象，從而服務器端與客戶端成功建立連接。  
+（4）客戶端與服務器端之間的通信操作，java.net.Socket類就是提供客戶端與服務器端相互通信的套接字。  
+獲取Socket套接字的輸入流的方法為：  
+```public InputStream getInputStream() throws IOException```  
+獲取Socket套接字的輸出流的方法為：  
+```public OutputStream getOutputStream() throws IOException```  
+在獲取了服務器端與客戶端的輸入輸出流之後，進行信息輸入輸出即可進行通信操作。  
+（5）服務器端與客戶端之間通信結束後，需要關閉套接字，調用close()方法即可。close()方法如下：  
+```public void close() throws IOException```  
+
 
 
 
