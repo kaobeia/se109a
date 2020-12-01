@@ -16,7 +16,8 @@
 利用Socket編程，客戶端與服務器端建立連接的步驟如下：  
 
 （1）服務器端通過java.net.ServerSocket類的構造方法實例化ServerSocket對象，選擇的構造方法如下：  
-```public ServerSocket (int port) throws IOException  ```
+```public ServerSocket (int port) throws IOException```  
+該構造方法需要傳入參數：端口號，從而創建綁定到指定端口的服務器套接字。  
 
 
 
